@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict
 
@@ -16,3 +17,13 @@ class FileOut(BaseModel):
     status: FileStatus
     error_message: str | None = None
     created_at: datetime
+
+
+class FeatureOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    feature_index: int
+    geometry_type: str
+    geometry: dict[str, Any] | None
+    crs: str | None
+    properties: dict[str, Any]
